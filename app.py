@@ -47,12 +47,21 @@ def webhook():
     Esta función se ejecuta cada vez que recibe un mensaje por WhatsApp
     """
     try:
+        print("=" * 50)
+        print("🔔 WEBHOOK RECIBIDO")
+        print(f"Todos los datos: {request.values}")
+        print("=" * 50)
+        
         # Obtiene el mensaje recibido
         incoming_msg = request.values.get("Body", "")
         # Obtiene el número de quien envía el mensaje
         sender = request.values.get("From")
         
         print(f"📥 Mensaje recibido de {sender}: {incoming_msg}")
+        
+        if not incoming_msg:
+            print("⚠️ Mensaje vacío recibido")
+            return "OK", 200
         
         # Procesa el mensaje y obtiene la respuesta
         respuesta = procesar_mensaje(incoming_msg)
@@ -70,6 +79,8 @@ def webhook():
     
     except Exception as e:
         print(f"❌ Error: {e}")
+        import traceback
+        traceback.print_exc()
         return "Error", 500
 
 @app.route("/", methods=["GET"])
