@@ -1,0 +1,13 @@
+Flask==2.3.2
+twilio==8.10.0
+Werkzeug==2.3.6
+gunicorn==21.2.0
+```
+
+**`.gitignore`:**
+```
+__pycache__/
+*.pyc
+.env
+venv/
+.DS_Store
